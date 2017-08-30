@@ -1,3 +1,7 @@
+NB This is an archive of Jesper Harder's dpans2texi script, available
+under the GPLv2; the original site has disappeared.
+
+
                                  dpans2texi.el
 
    dpans2texi.el converts the TeX sources of the draft ANSI Common Lisp
