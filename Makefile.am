@@ -30,5 +30,5 @@ docbook: temp.texi
 	$(MAKEINFO) $(AM_MAKEINFOHTMLFLAGS) --docbook temp.texi
 
 wget: 
-	wget -r -np -nd -A tex http://quimby.gnus.org/circus/cl/dpANS3/
-	wget -r -np -nd -A tex http://quimby.gnus.org/circus/cl/dpANS3R/
+	wget -r -np -nd -A tex https://web.archive.org/web/20060103140947/http://quimby.gnus.org/circus/cl/dpANS3/
+	wget -r -np -nd -A tex https://web.archive.org/web/20060103140947/http://quimby.gnus.org/circus/cl/dpANS3R/

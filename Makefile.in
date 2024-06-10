@@ -696,8 +696,8 @@ docbook: temp.texi
 	$(MAKEINFO) $(AM_MAKEINFOHTMLFLAGS) --docbook temp.texi
 
 wget: 
-	wget -r -np -nd -A tex http://quimby.gnus.org/circus/cl/dpANS3/
-	wget -r -np -nd -A tex http://quimby.gnus.org/circus/cl/dpANS3R/
+	wget -r -np -nd -A tex https://web.archive.org/web/20060103140947/http://quimby.gnus.org/circus/cl/dpANS3/
+	wget -r -np -nd -A tex https://web.archive.org/web/20060103140947/http://quimby.gnus.org/circus/cl/dpANS3R/
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
