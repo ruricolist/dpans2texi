@@ -21,16 +21,8 @@ temp.texi: dpans2texi.elc
 dpans2texi.elc: dpans2texi.el
 	$(EMACS) -f batch-byte-compile dpans2texi.el
 
-# Makeinfo (texi2any 7.0.3 on OpenSuse Tumbleweed) reliably crashes
-# with "realloc(): invalid next size" with --html or --epub
-ansicl.html: temp.texi
-	$(MAKEINFO) $(CSS) --html temp.texi
-
-ansicl.xml: temp.texi
-	$(MAKEINFO) $(CSS) --xml temp.texi
-
-ansicl.docbook: temp.texi
-	$(MAKEINFO) $(CSS) --docbook temp.texi
+ansicl.$(FMT): temp.texi
+	$(MAKEINFO) $(CSS) --$(FMT) temp.texi
 
 install:
 	cp ansicl.info $(INFO_DIR)
