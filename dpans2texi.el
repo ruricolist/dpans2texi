@@ -1599,7 +1599,7 @@ This would probably be better done with a diff.  Oh, well."
 	case-fold-search)
     (dolist (file (directory-files default-directory nil "ansicl-?[0-9]*$"))
       (with-temp-buffer
-	(let ((coding-system-for-read 'latin-1))
+	(let ((coding-system-for-read 'utf-8))
 	  (insert-file-contents file))
 	(dp-pm)
 	(while (re-search-forward re nil t)

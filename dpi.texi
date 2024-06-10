@@ -1,45 +1,45 @@
-@c -*- Mode: Texinfo; coding: latin-1; -*-
+@c -*- Mode: Texinfo; coding: utf-8; -*-
 @ifinfo
-@definfoenclose code,ÿ,ş
+@definfoenclose code,Ã¿,Ã¾
 
 @macro metavar {arg}
-«\arg\»
+Â«\arg\Â»
 @end macro
 
 @macro cubed {}
-³
+Â³
 @end macro
 
 @macro result {}
-@r{ı}
+@r{Ã½}
 @end macro
 
 @macro OUT {}
-Ö
+Ã–
 @end macro
 
 @macro EQ {}
-Õ
+Ã•
 @end macro
 
 @macro CRLF {}
-ô
+Ã´
 @end macro
 
 @macro uumlaut {}
-ü
+Ã¼
 @end macro
 
 @macro down {arg}
-@t{û}\arg\
+@t{Ã»}\arg\
 @end macro
 
 @macro prevplus {}
-ú
+Ãº
 @end macro
 
 @macro begininterleave {}
-ù
+Ã¹
 @end macro
 
 @macro extrainterleave {}
@@ -47,7 +47,7 @@
 @end macro
 
 @macro endinterleave {}
-ø
+Ã¸
 @end macro
 
 @macro ssso {}
@@ -67,55 +67,55 @@
 @end macro
 
 @macro neq {}
-â
+Ã¢
 @end macro
 
 @macro in {}
-÷
+Ã·
 @end macro
 
 @macro geq {}
-ö
+Ã¶
 @end macro
 
 @macro bigcup {}
-õ
+Ãµ
 @end macro
 
 @macro leq {}
-ó
+Ã³
 @end macro
 
 @macro langle {}
-ò
+Ã²
 @end macro
 
 @macro rangle {}
-ñ
+Ã±
 @end macro
 
 @macro downarrow {}
-ğ
+Ã°
 @end macro
 
 @macro Partial {}
-ï
+Ã¯
 @end macro
 
 @macro pi {}
-î
+Ã®
 @end macro
 
 @macro epsilon {}
-í
+Ã­
 @end macro
 
 @macro alfa {}
-ì
+Ã¬
 @end macro
 
 @macro cdot {}
-ë
+Ã«
 @end macro
 
 @macro centerdot {}
@@ -123,35 +123,35 @@
 @end macro
 
 @macro Stress {arg}
-ê\arg\
+Ãª\arg\
 @end macro
 
 @macro stress {arg}
-é\arg\
+Ã©\arg\
 @end macro
 
 @macro schwa {}
-è
+Ã¨
 @end macro
 
 @macro harda {}
-ç
+Ã§
 @end macro
 
 @macro harde {}
-æ
+Ã¦
 @end macro
 
 @macro hardo {arg}
-å
+Ã¥
 @end macro
 
 @macro maybeStress {arg}
-ä\arg\
+Ã¤\arg\
 @end macro
 
 @macro one {arg}
-\arg\¹
+\arg\Â¹
 @end macro
 
 @rmacro subs {arg}
@@ -163,43 +163,43 @@ _\arg\
 @end macro
 
 @macro sub0 {}
-Ø
+Ã˜
 @end macro
 
 @macro sub1 {}
-á
+Ã¡
 @end macro
 
 @macro sub2 {}
-à
+Ã 
 @end macro
 
 @macro sub3 {}
-ß
+ÃŸ
 @end macro
 
 @macro sub4 {}
-Ş
+Ã
 @end macro
 
 @macro sub5 {}
-İ
+Ã
 @end macro
 
 @macro sub6 {}
-Ü
+Ãœ
 @end macro
 
 @macro sub7 {}
-Û
+Ã›
 @end macro
 
 @macro sub8 {}
-Ú
+Ãš
 @end macro
 
 @macro sub9 {}
-Ù
+Ã™
 @end macro
 
 @macro subOne {}
@@ -207,6 +207,6 @@ _\arg\
 @end macro
 
 @macro le {}
-ã
+Ã£
 @end macro
 @end ifinfo
