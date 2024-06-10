@@ -64,7 +64,7 @@
 (defvar dp-preamble
   "\\input texinfo                  @c -*-texinfo-*-
 @c %**start of header
-@setfilename ansicl
+@setfilename ansicl.info
 @settitle ANSI Common Lisp
 @paragraphindent 0
 @exampleindent 0
@@ -1597,7 +1597,7 @@ This would probably be better done with a diff.  Oh, well."
   (let ((re (concat "[" (mapconcat (lambda (x) (car x)) dp-tr-alist "")
 		    "]"))
 	case-fold-search)
-    (dolist (file (directory-files default-directory nil "ansicl-?[0-9]*$"))
+    (let ((file "ansicl.info"))
       (with-temp-buffer
 	(let ((coding-system-for-read 'utf-8))
 	  (insert-file-contents file))

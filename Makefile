@@ -6,10 +6,10 @@ ANSI3R_URL = https://web.archive.org/web/$(WAYBACK)/http://quimby.gnus.org/circu
 
 .PHONY = all html xml docbook wget clean
 
-all: ansicl
+all: ansicl.info
 
-ansicl: dpans2texi.elc temp.texi
-	makeinfo --no-warn --force --enable-encoding temp.texi
+ansicl.info: dpans2texi.elc temp.texi
+	makeinfo --no-split --no-warn --force --enable-encoding temp.texi
 	$(EMACS) -l dpans2texi.elc -f dp-tr
 
 temp.texi: dpans2texi.elc
@@ -32,7 +32,7 @@ wget:
 	$(WGET) $(ANSI3R_URL)
 
 clean:
-	rm -f temp.texi ansicl ansicl-[0-9] ansicl-[0-9][0-9]
+	rm -f temp.texi ansicl.info
 	rm -f elc-stamp dpans2texi.elc
 	rm -f ansicl.aux ansicl.cp ansicl.cps ansicl.fn ansicl.fns ansicl.ky \
 	      ansicl.kys ansicl.log ansicl.pg ansicl.pgs ansicl.tmp \

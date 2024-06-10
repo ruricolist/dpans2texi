@@ -1,1 +1,1 @@
-@setfilename ansicl
+@setfilename ansicl.info
