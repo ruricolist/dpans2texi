@@ -9,7 +9,7 @@ ANSI3R_URL = https://web.archive.org/web/$(WAYBACK)/http://quimby.gnus.org/circu
 all: ansicl
 
 ansicl: dpans2texi.elc temp.texi
-	makeinfo --no-warn --enable-encoding temp.texi
+	makeinfo --no-warn --force --enable-encoding temp.texi
 	$(EMACS) -l dpans2texi.elc -f dp-tr
 
 temp.texi: dpans2texi.elc
