@@ -4,7 +4,7 @@
 
 ;; Author: Jesper Harder <harder@phys.au.dk>
 ;; Created: 1 Mar 2004
-;; Version: 1.04
+;; Version: 1.06
 ;; Location: <http://purl.org/harder/dpans.html>
 ;; Keywords: Lisp, documentation
 
