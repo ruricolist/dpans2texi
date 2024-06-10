@@ -2,6 +2,7 @@ CSS        = --css-include=ansicl.css
 WGET       = wget -r -np -nd -A tex
 EMACS      = emacs --batch -q
 MAKEINFO   = makeinfo --no-split --no-warn --force --enable-encoding
+INFO_DIR  ?= /usr/share/info
 WAYBACK    = 20160603133923
 ANSI3_URL  = https://web.archive.org/web/$(WAYBACK)/http://quimby.gnus.org/circus/cl/dpANS3/
 ANSI3R_URL = https://web.archive.org/web/$(WAYBACK)/http://quimby.gnus.org/circus/cl/dpANS3R/
@@ -31,6 +32,13 @@ ansicl.xml: temp.texi
 ansicl.docbook: temp.texi
 	$(MAKEINFO) $(CSS) --docbook temp.texi
 
+install:
+	cp ansicl.info $(INFO_DIR)
+	install-info $(INFO_DIR)/ansicl.info $(INFO_DIR)/dir
+
+uninstall:
+	install-info --delete $(INFO_DIR)/ansicl.info $(INFO_DIR)/dir
+	rm $(INFO_DIR)/ansicl.info
 wget:
 	$(WGET) $(ANSI3_URL)
 	$(WGET) $(ANSI3R_URL)
