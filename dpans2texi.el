@@ -54,12 +54,7 @@
 ;;; Code:
 
 (require 'rx)
-
-;; Emacs warns that "package cl is deprecated", however if this line
-;; is removed we get a "void function (`cl-mapcar')" error where it's
-;; passed to `apply' in `dp-transpose'.  Renaming it to `mapcar*' has
-;; no effect.
-(require 'cl)
+(require 'cl-lib)
 
 (defvar dp-preamble
   "\\input texinfo                  @c -*-texinfo-*-

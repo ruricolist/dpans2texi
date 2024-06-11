@@ -85,9 +85,6 @@ under the GPLv2; the original site has disappeared.
    Bugs in dpans2texi.el:
      * Emacs warns about lack of lexical-binding directive, I'm not
        sure if it would be safe to add it.
-     * Emacs warns about package cl being deprecated but it needs to
-       be required in order for apply to find cl-mapcar in
-       dp-transpose.
      * When not suppressed, makeinfo prints a LOT of warnings and
        three errors from temp.texi, which are likely the cause of
        broken backreferences and conversion failures.
