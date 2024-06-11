@@ -1,11 +1,11 @@
-CSS        = --css-include=ansicl.css
-WGET       = wget -r -np -nd -A tex
-EMACS      = emacs --batch -q
-MAKEINFO   = makeinfo --no-split --no-warn --force --enable-encoding
-INFO_DIR  ?= /usr/share/info
-WAYBACK    = 20160603133923
-ANSI3_URL  = https://web.archive.org/web/$(WAYBACK)/http://quimby.gnus.org/circus/cl/dpANS3/
-ANSI3R_URL = https://web.archive.org/web/$(WAYBACK)/http://quimby.gnus.org/circus/cl/dpANS3R/
+CSS        := --css-include=ansicl.css
+WGET       := wget -r -np -nd -A tex
+EMACS      := emacs --batch -q
+MAKEINFO   := makeinfo --no-split --no-warn --force --enable-encoding
+INFO_DIR   ?= /usr/share/info
+WAYBACK    := 20160603133923
+ANSI3_URL  := https://web.archive.org/web/$(WAYBACK)/http://quimby.gnus.org/circus/cl/dpANS3/
+ANSI3R_URL := https://web.archive.org/web/$(WAYBACK)/http://quimby.gnus.org/circus/cl/dpANS3R/
 
 .PHONY = all wget clean
 
