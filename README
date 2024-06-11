@@ -83,8 +83,6 @@ under the GPLv2; the original site has disappeared.
      * Emacs on Mac OS X doesn't display all characters even though the
        font does contain them.
    Bugs in dpans2texi.el:
-     * Emacs warns about lack of lexical-binding directive, I'm not
-       sure if it would be safe to add it.
      * When not suppressed, makeinfo prints a LOT of warnings and
        three errors from temp.texi, which are likely the cause of
        broken backreferences and conversion failures.

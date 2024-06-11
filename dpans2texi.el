@@ -1,4 +1,4 @@
-;;; dpans2texi.el --- Convert the ANSI Common Lisp draft to Texinfo
+;;; dpans2texi.el --- Convert the ANSI Common Lisp draft to Texinfo -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2004,2005,2008 Jesper Harder
 
@@ -260,7 +260,7 @@ If INPLACE is non-nil, do it destructively"
 	  (delete-char -1))))))
 
 
-(defun dp-f (command)
+(defun dp-f (_command)
   "Convert f commands."
   (replace-match "")
   (save-excursion
@@ -277,11 +277,11 @@ If INPLACE is non-nil, do it destructively"
 (dp-defconvert 'dp-delete-command
 	       'issue 'endissue 'bye 'endsubsubsubsubsection)
 
-(defun dp-delete-command (command)
+(defun dp-delete-command (_command)
   (dp-delete-line))
 
 (dp-defconvert 'dp-delete-command-1 'Vskip)
-(defun dp-delete-command-1 (command)
+(defun dp-delete-command-1 (_command)
   (delete-region (line-beginning-position) (line-end-position)))
 
 (put 'code 'convert 'dp-translate)
@@ -345,7 +345,7 @@ If INPLACE is non-nil, do it destructively"
 
 (defvar dp-current-fig-label nil)
 (dp-defconvert 'dp-DefineFigure 'DefineFigure)
-(defun dp-DefineFigure (command)
+(defun dp-DefineFigure (_command)
   (replace-match "")
   (setq dp-current-fig-label (dp-get-arg-delete)))
 
@@ -369,7 +369,7 @@ If INPLACE is non-nil, do it destructively"
 	  (search-forward "\\cr")
 	  (push (dp-trim-whitespace
 		 (buffer-substring p (- (point) 3))) row)
-	  (dotimes (i (- n (length row)))
+	  (dotimes (_i (- n (length row)))
 	    (push "" row))
 	  (push (nreverse row) rows)
 	  (setq row nil))
@@ -422,7 +422,7 @@ If INPLACE is non-nil, do it destructively"
 	(caption (dp-get-arg-delete))
 	rows heads)
     (when (string-match "tablefig" command)
-      (dotimes (i n)
+      (dotimes (_i n)
 	(push (dp-get-arg-delete) heads))
       (setq heads (nreverse heads)))
     (setq rows (dp-get-rows n))
@@ -461,14 +461,14 @@ If INPLACE is non-nil, do it destructively"
   (setq dp-current-fig-label nil))
 
 (dp-defconvert 'dp-quadrant 'dpquadrant)
-(defun dp-quadrant (command)
+(defun dp-quadrant (_command)
   (cl-incf dp-fig-no)
   (replace-match "@quadrant{}"))
 
 (dp-defconvert 'dp-tabletwo 'tabletwo)
-(defun dp-tabletwo (command)
+(defun dp-tabletwo (_command)
   "Table in the Glossary."
-  (let (head rows)
+  (let (_head rows)
     (replace-match "")
     (insert "\n@multitable @columnfractions 0.25 0.7\n")
     (insert "\n@headitem " (dp-get-arg-delete) "@tab " (dp-get-arg-delete) "\n")
@@ -483,7 +483,7 @@ If INPLACE is non-nil, do it destructively"
       (insert "\n@end multitable\n"))))
 
 (dp-defconvert 'dp-simplecaption 'simplecaption)
-(defun dp-simplecaption (command)
+(defun dp-simplecaption (_command)
   (replace-match "")
   (let ((arg (dp-get-arg-delete)))
     (save-excursion
@@ -510,7 +510,7 @@ We must prepend the type to these nodes.")
 (defvar dp-anchors nil)
 
 (dp-defconvert 'dp-begincom 'begincom)
-(defun dp-begincom (command)
+(defun dp-begincom (_command)
   "Beginning of a dictionary entry."
   (let (node-name dname type beg names)
     (setq beg (line-beginning-position))
@@ -542,12 +542,12 @@ We must prepend the type to these nodes.")
 	(push name dp-anchors)))))
 
 (dp-defconvert 'dp-endcom 'endcom)
-(defun dp-endcom (command)
+(defun dp-endcom (_command)
   (setq dp-current-label nil)
   (dp-delete-line))
 
 (dp-defconvert 'dp-label 'label)
-(defun dp-label (command)
+(defun dp-label (_command)
   (let (label)
     (skip-chars-forward " ")
     (setq label (buffer-substring
@@ -592,10 +592,10 @@ We must prepend the type to these nodes.")
 	(push (cons label name) dp-section-names)))))
 
 (dp-defconvert 'dp-beginchapter 'beginchapter)
-(defun dp-beginchapter (command)
+(defun dp-beginchapter (_command)
   (setq dp-current-chapter-no (dp-get-arg-delete))
   (let ((name (dp-get-arg-delete))
-	(ref-name (dp-get-arg-delete)))
+	(_ref-name (dp-get-arg-delete)))
     (dp-delete-line)
     (insert "@node " name "\n")
     (if (string= dp-current-chapter-no "A")
@@ -607,7 +607,7 @@ We must prepend the type to these nodes.")
     (message "Converting %s" name)))
 
 (dp-defconvert 'dp-endchapter 'endchapter)
-(defun dp-endchapter (command)
+(defun dp-endchapter (_command)
   (save-excursion
     (dp-delete-line)
     (goto-char dp-current-chapter-marker)
@@ -627,7 +627,7 @@ We must prepend the type to these nodes.")
 	  dp-section-no 0)))
 
 (dp-defconvert 'dp-beginsection 'beginSection)
-(defun dp-beginsection (command)
+(defun dp-beginsection (_command)
   (let* ((secname (dp-get-arg))
         (node-name  (subst-char-in-string ?, ?\; secname nil)))
     (setq dp-current-section-name node-name)
@@ -641,7 +641,7 @@ We must prepend the type to these nodes.")
 (defvar dp-subsections-list nil)
 
 (dp-defconvert 'dp-endsection 'endSection)
-(defun dp-endsection (command)
+(defun dp-endsection (_command)
   (dp-delete-line)
   (setq dp-subsection-no 0)
   (setq dp-subsubsection-no 0)
@@ -663,7 +663,7 @@ We must prepend the type to these nodes.")
   'beginSubsection
   'beginsubSection)
 
-(defun dp-beginsubsection (command)
+(defun dp-beginsubsection (_command)
   (let ((name (dp-get-arg)))
     (setq name
 	  (with-temp-buffer
@@ -683,13 +683,13 @@ We must prepend the type to these nodes.")
 	       'endSubsection 'endsubsection 'endSubsection
 	       'endsubSection)
 
-(defun dp-endsubsection (command)
+(defun dp-endsubsection (_command)
   (dp-delete-line)
   (setq dp-subsubsection-no 0
 	dp-subsubsubsection-no 0))
 
 (dp-defconvert 'dp-beginsubsubsection 'beginsubsubsection)
-(defun dp-beginsubsubsection (command)
+(defun dp-beginsubsubsection (_command)
   (let ((name (dp-get-arg)))
     (setq name
 	  (with-temp-buffer
@@ -703,12 +703,12 @@ We must prepend the type to these nodes.")
     (cl-incf dp-subsubsection-no)))
 
 (dp-defconvert 'dp-endsubsubsection 'endsubsubsection)
-(defun dp-endsubsubsection (command)
+(defun dp-endsubsubsection (_command)
   (dp-delete-line)
   (setq dp-subsubsubsection-no 0))
 
 (dp-defconvert 'dp-beginsubsubsubsection'beginsubsubsubsection)
-(defun dp-beginsubsubsubsection (command)
+(defun dp-beginsubsubsubsection (_command)
   (replace-match "")
   (let ((name (dp-get-arg-delete)))
     (setq dp-current-section-name name)
@@ -720,12 +720,12 @@ We must prepend the type to these nodes.")
 	     (cl-incf dp-subsubsubsection-no) name))))
 
 (dp-defconvert 'dp-endsubsubsubsection 'endsubsubsubsection)
-(defun dp-endsubsubsubsection (command)
+(defun dp-endsubsubsubsection (_command)
   (dp-delete-line)
   (setq dp-subsubsubsubsection-no 0))
 
 (dp-defconvert 'dp-beginsubsubsubsubsection 'beginsubsubsubsubsection)
-(defun dp-beginsubsubsubsubsection (command)
+(defun dp-beginsubsubsubsubsection (_command)
   (replace-match "")
   (let ((name (dp-get-arg-delete)))
     (setq dp-current-section-name name)
@@ -738,7 +738,7 @@ We must prepend the type to these nodes.")
 	     (cl-incf dp-subsubsubsubsection-no) name))))
 
 (dp-defconvert 'dp-definesection 'DefineSection)
-(defun dp-definesection (command)
+(defun dp-definesection (_command)
   (replace-match "")
   (let ((name (dp-get-arg-delete)))
     (unless (string= name dp-current-section-name)
@@ -746,14 +746,14 @@ We must prepend the type to these nodes.")
       (push name dp-anchors))))
 
 (dp-defconvert 'dp-vskip 'vskip)
-(defun dp-vskip (command)
+(defun dp-vskip (_command)
   (replace-match "")
   (delete-region (point) (search-forward "pt")))
 
 ;; multi
 
 (dp-defconvert 'dp-defun-multi-with-values 'DefunMultiWithValues)
-(defun dp-defun-multi-with-values (command)
+(defun dp-defun-multi-with-values (_command)
   (replace-match "")
   (let ((arg1 (dp-quote-comma (dp-get-arg-delete)))
 	(arg2 (dp-quote-comma (dp-get-arg-delete)))
@@ -770,7 +770,7 @@ We must prepend the type to these nodes.")
 	(insert "@DefunWithValues{" entry ", " arg1 ", " arg2 "}\n")))))
 
 (dp-defconvert 'dp-defun-multi-accessor-with-values 'DefunMultiAccessorWithValues)
-(defun dp-defun-multi-accessor-with-values (command)
+(defun dp-defun-multi-accessor-with-values (_command)
   (replace-match "")
   (let ((arg1 (dp-get-arg-delete))
 	(arg2 (dp-get-arg-delete))
@@ -790,7 +790,7 @@ We must prepend the type to these nodes.")
       (insert "@*\n"))))
 
 (dp-defconvert 'dp-defsetf-multi 'DefsetfMulti)
-(defun dp-defsetf-multi (command)
+(defun dp-defsetf-multi (_command)
   (replace-match "")
   (let ((arg1 (dp-get-arg-delete))
 	(arg2 (dp-get-arg-delete))
@@ -808,7 +808,7 @@ We must prepend the type to these nodes.")
 	(insert "@*\n")))))
 
 (dp-defconvert 'dp-docmethods 'DocMethods)
-(defun dp-docmethods (command)
+(defun dp-docmethods (_command)
   (replace-match "")
   (let ((arg1 (dp-get-arg-delete))
 	(arg2 (dp-get-arg-delete))
@@ -830,13 +830,13 @@ We must prepend the type to these nodes.")
 		(cadr entry) ")}) " (cadr entry) "\n\n")))))
 
 (dp-defconvert 'dp-Defmeth 'Defmeth)
-(defun dp-Defmeth (command)
+(defun dp-Defmeth (_command)
   (replace-match ""))
 
 ;;; Glossary
 
 (dp-defconvert 'dp-indextab 'indextab)
-(defun dp-indextab (command)
+(defun dp-indextab (_command)
   (let ((arg (dp-get-arg)))
     (push arg dp-nodes)
     (dp-delete-line)
@@ -846,7 +846,7 @@ We must prepend the type to these nodes.")
 	    "@table @asis\n")))
 
 (dp-defconvert 'dp-firstindextab 'firstindextab)
-(defun dp-firstindextab (command)
+(defun dp-firstindextab (_command)
   (let ((arg (dp-get-arg)))
     (push arg dp-nodes)
     (dp-delete-line)
@@ -855,7 +855,7 @@ We must prepend the type to these nodes.")
 	    "@table @asis\n")))
 
 (dp-defconvert 'dp-gentry 'gentry)
-(defun dp-gentry (command)
+(defun dp-gentry (_command)
   (replace-match "")
   (let ((arg (dp-get-arg-delete)))
     (insert "@item @b{" arg "} @anchor{glos-" arg "}\n")
@@ -864,7 +864,7 @@ We must prepend the type to these nodes.")
 ;;; Lists
 
 (dp-defconvert 'dp-beginlist 'beginlist)
-(defun dp-beginlist (command)
+(defun dp-beginlist (_command)
   (let (arg)
     (save-excursion
       (re-search-forward (rx (or "\\itemitem" "\\item")))
@@ -889,7 +889,7 @@ We must prepend the type to these nodes.")
       (table (insert "\n@table @asis\n")))))
 
 (dp-defconvert 'dp-endlist 'endlist)
-(defun dp-endlist (command)
+(defun dp-endlist (_command)
   (dp-delete-line)
   (when (save-excursion  ;; i.e. `looking-back'
 	  (re-search-backward "\\(?:\n\n\\)\\=" nil t))
@@ -900,7 +900,7 @@ We must prepend the type to these nodes.")
     (table (insert "@end table\n\n"))))
 
 (dp-defconvert 'dp-item 'itemitem 'item)
-(defun dp-item (command)
+(defun dp-item (_command)
   (let (arg)
     (cl-ecase (car dp-list-type)
       ((enumerate itemize)
@@ -1068,7 +1068,7 @@ We must prepend the type to these nodes.")
       (insert "\n"))))
 
 (dp-defconvert 'dp-newtermidx 'newtermidx)
-(defun dp-newtermidx (command)
+(defun dp-newtermidx (_command)
   (replace-match "")
   (let ((arg1 (dp-get-arg-delete))
 	(arg2 (dp-get-arg-delete)))
@@ -1105,7 +1105,7 @@ We must prepend the type to these nodes.")
     (?9 . "@sub9{}")))
 
 (dp-defconvert 'dp-sub 'sub)
-(defun dp-sub (command)
+(defun dp-sub (_command)
   (let (arg)
     (replace-match "")
     (delete-region (point) (progn (skip-chars-forward " \n") (point)))
@@ -1128,7 +1128,7 @@ We must prepend the type to these nodes.")
 	  (insert "@subs{" arg "}"))))))
 
 (dp-defconvert 'dp-meaning 'meaning)
-(defun dp-meaning (command)
+(defun dp-meaning (_command)
   (replace-match "")
   (let ((arg (dp-get-arg-delete)))
     (if (string-match "^[0-9]+$" arg)
