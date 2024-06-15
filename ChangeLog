@@ -1,3 +1,16 @@
+2024-06-09  Ymir <ymir@ulthar.xyz>
+	Version 1.06
+
+	* Makefile: Removed autotools build system and update hyperspec
+	download URL to a WayBack Machine archive.  Added a --force flag
+	to makeinfo invocation in order to bypass errors I don't know how
+	to fix, and added --no-split flag to produce a single output file
+	for easier installation.
+
+	* dpans2texi.el: Fix compilation warnings, use UTF-8 encoding.
+
+	* dpi.texi: Use UTF-8 encoding.
+
 2009-06-07  Jesper Harder  <jesper.harder@gmail.com>
 	Version 1.05
 
